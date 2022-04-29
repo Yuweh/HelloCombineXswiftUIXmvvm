@@ -14,7 +14,7 @@ class SampleViewModel: ObservableObject {
     
     init() {
         $myText
-            .map {$0.isEmpty ? "❌" : "✅" }
+            .map {$0.isEmpty ? "❌" : "\($0) ✅" }
             .assign(to: &$myMessage)
     }
 }
