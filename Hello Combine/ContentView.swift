@@ -6,13 +6,16 @@
 //
 
 import SwiftUI
+import Combine
 
 class SampleViewModel: ObservableObject {
     @Published var myText: String = ""
-    @Published var myMessage: String = "empty"
+    @Published var myMessage: String = ""
     
     init() {
-        
+        $myText
+            .map {$0.isEmpty ? "❌" : "✅" }
+            .assign(to: &$myMessage)
     }
 }
 
@@ -27,7 +30,7 @@ struct ContentView: View {
             Text("Hello world in Combine x SwiftUI x MVVM!")
                 .padding()
             
-            Text("Your text goes here: \($model.myMessage)")
+            Text("Your text goes here: \(model.myMessage)")
                 .padding()
         }
         
